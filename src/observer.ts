@@ -8,14 +8,14 @@ const observer: Observer = {
   once,
 }
 
-function on(key: string, fn: () => void): void {
+export function on(key: string, fn: () => void): void {
   if (!observer.list[key])
     observer.list[key] = []
 
   observer.list[key].push(fn as never)
 }
 
-function emit(key: string): void {
+export function emit(key: string): void {
   // console.log('list', observer.list)
   const useKey = Object.keys(observer.list).find(k => k === key)
   if (!useKey)
@@ -24,7 +24,7 @@ function emit(key: string): void {
   observer.list[key].forEach((fn: () => void) => fn())
 }
 
-function remove(key: string): boolean {
+export function remove(key: string): boolean {
   const isKeyExist = Object.keys(observer.list).includes(key)
   if (!isKeyExist)
     return true
@@ -33,11 +33,11 @@ function remove(key: string): boolean {
   return true
 }
 
-function once(key: string, fn: () => void): void {
+export function once(key: string, fn: () => void): void {
   on(key, () => {
     fn()
     remove(key)
   })
 }
 
-export { observer }
+export default observer
