@@ -4,4 +4,5 @@ export interface Observer {
   emit: (value: string) => void
   remove: (value: string) => boolean
   once: (value: string, fn: () => void) => void
+  removeAll: () => boolean
 }

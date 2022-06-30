@@ -6,6 +6,7 @@ const observer: Observer = {
   emit,
   remove,
   once,
+  removeAll,
 }
 
 export function on(key: string, fn: () => void): void {
@@ -30,6 +31,11 @@ export function remove(key: string): boolean {
 
   delete observer.list[key]
   return true
+}
+
+export function removeAll(): boolean {
+  observer.list = {}
+  return Boolean(Object.keys(observer.list).length)
 }
 
 export function once(key: string, fn: () => void): void {
