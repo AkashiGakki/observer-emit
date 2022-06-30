@@ -1,8 +1,8 @@
 # observer-emit
 
-[![NPM version](https://img.shields.io/npm/v/observer-emit?color=a1b858&label=)](https://www.npmjs.com/package/observer-emit)
+👀 📣 📢 🚀 event emit with observer.
 
-event emit with observer.
+[![NPM version](https://img.shields.io/npm/v/observer-emit?color=a1b858&label=)](https://www.npmjs.com/package/observer-emit)
 
 ## Install
 
