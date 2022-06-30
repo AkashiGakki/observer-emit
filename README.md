@@ -8,6 +8,8 @@
 
 ```bash
 npm i observer-emit
+yarn add observer-emit
+pnpm i observer-emit
 ```
 
 ## Usage
