@@ -14,7 +14,7 @@ npm i observer-emit
 
 
 ```ts
-import { observer } from 'observer-emit'
+import observer from 'observer-emit'
 
 observer.on('asuka', () => console.log('asuka', 1))
 observer.on('nagi', () => console.log('nagi'))

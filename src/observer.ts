@@ -16,7 +16,6 @@ export function on(key: string, fn: () => void): void {
 }
 
 export function emit(key: string): void {
-  // console.log('list', observer.list)
   const useKey = Object.keys(observer.list).find(k => k === key)
   if (!useKey)
     return

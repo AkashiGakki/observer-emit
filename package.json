@@ -1,7 +1,7 @@
 {
   "name": "observer-emit",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "packageManager": "pnpm@7.2.1",
   "description": "",
   "author": "Akashi Sai <akashi_sai@163.com>",
