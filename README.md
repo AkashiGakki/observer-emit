@@ -1,15 +1,27 @@
 # observer-emit
 
-👀 📣 📢 🚀 event emit with observer.
+👀 A Node.js event emitter works in the browser.
 
 [![NPM version](https://img.shields.io/npm/v/observer-emit?color=a1b858&label=)](https://www.npmjs.com/package/observer-emit)
 
 ## Install
 
+### using npm
+
 ```bash
-npm i observer-emit
-yarn add observer-emit
-pnpm i observer-emit
+$ npm i observer-emit
+```
+
+### using yarn
+
+```bash
+$ yarn add observer-emit
+```
+
+### using pnpm
+
+```bash
+$ pnpm i observer-emit
 ```
 
 ## Usage
