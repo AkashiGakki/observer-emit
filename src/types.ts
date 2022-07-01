@@ -3,6 +3,7 @@ export interface Observer {
   on: (value: string, fn: () => void) => void
   emit: (value: string) => void
   remove: (value: string) => boolean
-  once: (value: string, fn: () => void) => void
   removeAll: () => boolean
+  off: (value: string, fn: () => void) => boolean
+  once: (value: string, fn: () => void) => void
 }

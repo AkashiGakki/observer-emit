@@ -1,9 +1,9 @@
 {
   "name": "observer-emit",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@7.2.1",
-  "description": "",
+  "description": "👀 A Node.js event emitter works in the browser",
   "author": "Akashi Sai <akashi_sai@163.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/akashigakki",
@@ -13,7 +13,14 @@
     "url": "git+https://github.com/akashigakki/observer-emit.git"
   },
   "bugs": "https://github.com/akashigakki/observer-emit/issues",
-  "keywords": [],
+  "keywords": [
+    "typescript",
+    "javascript",
+    "event-emitter",
+    "node.js",
+    "vue",
+    "react"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {

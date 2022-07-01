@@ -8,6 +8,7 @@ describe('should', () => {
       {
         "emit": [Function],
         "list": {},
+        "off": [Function],
         "on": [Function],
         "once": [Function],
         "remove": [Function],
@@ -58,10 +59,12 @@ describe('should', () => {
   })
 
   it('remove', () => {
+    emitter.on('shiori', () => { })
     emitter.remove('yama')
     expect(emitter.list).toMatchInlineSnapshot(`
       {
         "shiori": [
+          [Function],
           [Function],
         ],
       }

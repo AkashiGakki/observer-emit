@@ -5,8 +5,9 @@ const observer: Observer = {
   on,
   emit,
   remove,
-  once,
   removeAll,
+  off,
+  once,
 }
 
 export function on(key: string, fn: () => void): void {
@@ -25,8 +26,7 @@ export function emit(key: string): void {
 }
 
 export function remove(key: string): boolean {
-  const isKeyExist = Object.keys(observer.list).includes(key)
-  if (!isKeyExist)
+  if (!isKeyExist(key))
     return true
 
   delete observer.list[key]
@@ -38,11 +38,27 @@ export function removeAll(): boolean {
   return Boolean(Object.keys(observer.list).length)
 }
 
+export function off(key: string, fn: () => void): boolean {
+  if (!isKeyExist(key))
+    return true
+
+  const index = observer.list[key].findIndex(f => f === fn)
+  observer.list[key].splice(index, 1)
+
+  if (!observer.list[key].length)
+    delete observer.list[key]
+  return true
+}
+
 export function once(key: string, fn: () => void): void {
   on(key, () => {
     fn()
-    remove(key)
+    off(key, fn)
   })
+}
+
+function isKeyExist(key: string): boolean {
+  return Object.keys(observer.list).includes(key)
 }
 
 export default observer
