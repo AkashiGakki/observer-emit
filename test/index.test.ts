@@ -7,7 +7,7 @@ describe('should', () => {
     expect(emitter).toMatchInlineSnapshot(`
       {
         "emit": [Function],
-        "list": {},
+        "list": Map {},
         "off": [Function],
         "on": [Function],
         "once": [Function],
@@ -20,25 +20,25 @@ describe('should', () => {
   it('on', () => {
     emitter.on('shiori', () => { })
     expect(emitter.list).toMatchInlineSnapshot(`
-      {
-        "shiori": [
+      Map {
+        "shiori" => Set {
           [Function],
-        ],
+        },
       }
     `)
   })
 
   it('emit', () => {
-    emitter.on('yama', () => { })
-    emitter.emit('mizuki')
+    emitter.on('mizuki', () => { })
+    emitter.emit('yama')
     expect(emitter.list).toMatchInlineSnapshot(`
-      {
-        "shiori": [
+      Map {
+        "shiori" => Set {
           [Function],
-        ],
-        "yama": [
+        },
+        "mizuki" => Set {
           [Function],
-        ],
+        },
       }
     `)
   })
@@ -47,32 +47,48 @@ describe('should', () => {
     emitter.once('yoda', () => { })
     emitter.emit('yoda')
     expect(emitter.list).toMatchInlineSnapshot(`
-      {
-        "shiori": [
+      Map {
+        "shiori" => Set {
           [Function],
-        ],
-        "yama": [
+        },
+        "mizuki" => Set {
           [Function],
-        ],
+        },
+      }
+    `)
+  })
+
+  it('off', () => {
+    const fn = () => {}
+    emitter.on('ayame', fn)
+    emitter.off('ayame', fn)
+    expect(emitter.list).toMatchInlineSnapshot(`
+      Map {
+        "shiori" => Set {
+          [Function],
+        },
+        "mizuki" => Set {
+          [Function],
+        },
       }
     `)
   })
 
   it('remove', () => {
     emitter.on('shiori', () => { })
-    emitter.remove('yama')
+    emitter.remove('mizuki')
     expect(emitter.list).toMatchInlineSnapshot(`
-      {
-        "shiori": [
+      Map {
+        "shiori" => Set {
           [Function],
           [Function],
-        ],
+        },
       }
     `)
   })
 
   it('removeAll', () => {
     emitter.removeAll()
-    expect(emitter.list).toMatchInlineSnapshot('{}')
+    expect(emitter.list).toMatchInlineSnapshot('Map {}')
   })
 })
