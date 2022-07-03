@@ -1,5 +1,5 @@
 export interface Observer {
-  list: Record<string, any[]>
+  list: Map<string, Set<() => void>>
   on: (value: string, fn: () => void) => void
   emit: (value: string) => void
   remove: (value: string) => boolean
@@ -7,3 +7,5 @@ export interface Observer {
   off: (value: string, fn: () => void) => boolean
   once: (value: string, fn: () => void) => void
 }
+
+export type Func = () => void

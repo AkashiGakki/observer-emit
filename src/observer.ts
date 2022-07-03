@@ -1,7 +1,7 @@
-import type { Observer } from './types'
+import type { Func, Observer } from './types'
 
-const observer: Observer = {
-  list: {},
+const emitter: Observer = {
+  list: new Map<string, Set<Func>>(),
   on,
   emit,
   remove,
@@ -10,55 +10,67 @@ const observer: Observer = {
   once,
 }
 
-export function on(key: string, fn: () => void): void {
-  if (!observer.list[key])
-    observer.list[key] = []
+const singleList = new Map<string, Set<Func>>()
 
-  observer.list[key].push(fn as never)
+export function on(key: string, fn: Func): void {
+  if (!emitter.list.has(key))
+    emitter.list.set(key, new Set())
+
+  emitter.list.get(key)?.add(fn)
 }
 
 export function emit(key: string): void {
-  const useKey = Object.keys(observer.list).find(k => k === key)
-  if (!useKey)
+  if (!emitter.list.has(key))
     return
 
-  observer.list[key].forEach((fn: () => void) => fn())
+  emitter.list.get(key)?.forEach((fn: Func) => fn())
+
+  if (singleList.has(key))
+    singleRemoveEffect(key)
 }
 
 export function remove(key: string): boolean {
-  if (!isKeyExist(key))
+  if (!emitter.list.has(key))
     return true
 
-  delete observer.list[key]
+  emitter.list.delete(key)
   return true
 }
 
 export function removeAll(): boolean {
-  observer.list = {}
-  return Boolean(Object.keys(observer.list).length)
+  return Boolean(emitter.list.clear())
 }
 
-export function off(key: string, fn: () => void): boolean {
-  if (!isKeyExist(key))
+export function off(key: string, fn: Func): boolean {
+  if (!emitter.list.has(key))
     return true
 
-  const index = observer.list[key].findIndex(f => f === fn)
-  observer.list[key].splice(index, 1)
+  emitter.list.get(key)?.delete(fn)
 
-  if (!observer.list[key].length)
-    delete observer.list[key]
+  if (!emitter.list.get(key)?.size)
+    emitter.list.delete(key)
   return true
 }
 
-export function once(key: string, fn: () => void): void {
-  on(key, () => {
-    fn()
-    off(key, fn)
-  })
+export function once(key: string, fn: Func): void {
+  on(key, fn)
+
+  if (!singleList.has(key))
+    singleList.set(key, new Set())
+
+  singleList.get(key)?.add(fn)
 }
 
-function isKeyExist(key: string): boolean {
-  return Object.keys(observer.list).includes(key)
+function singleRemoveEffect(key: string): void {
+  const fns = singleList.get(key)
+  emitter.list.get(key)?.forEach(ret => fns?.forEach((f: Func) => {
+    if (f === ret)
+      emitter.list.get(key)?.delete(ret)
+
+    if (!emitter.list.get(key)?.size)
+      emitter.list.delete(key)
+  }))
+  singleList.get(key)?.clear()
 }
 
-export default observer
+export default emitter
