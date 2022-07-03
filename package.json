@@ -44,6 +44,7 @@
     "dist"
   ],
   "scripts": {
+    "babel": "npx babel src --extensions .ts --out-dir lib",
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
@@ -51,6 +52,7 @@
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
+    "tsc": "tsc",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -61,10 +63,13 @@
     "@babel/node": "^7.18.6",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
     "@babel/plugin-transform-typescript": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@types/node": "^18.0.0",
     "bumpp": "^8.2.1",
+    "core-js": "^3.23.3",
     "eslint": "^8.18.0",
     "esno": "^0.16.3",
     "pnpm": "^7.2.1",
