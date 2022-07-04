@@ -47,7 +47,7 @@
     "babel": "npx babel src --extensions .ts --out-dir lib",
     "build": "unbuild",
     "dev": "unbuild --stub",
-    "esbuild": "npx tsno run build.ts",
+    "esbuild": "rm -rf dist && npx tsno run build.ts",
     "lint": "eslint .",
     "prepublishOnly": "nr esbuild",
     "release": "bumpp && npm publish",

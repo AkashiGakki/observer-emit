@@ -10,7 +10,7 @@ const sharedConfig = {
   entryPoints: ["src/index.ts"],
   // outdir: 'dist',
   bundle: true,
-  sourcemap: true,
+  // sourcemap: true,
   minify: true,
   // splitting: true,
   // target: ['esnext']
