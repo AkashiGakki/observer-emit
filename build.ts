@@ -1,4 +1,4 @@
-const { build } = require("esbuild")
+const { build } = require('esbuild')
 const { Generator } = require('npm-dts')
 
 new Generator({
@@ -7,7 +7,7 @@ new Generator({
 }).generate()
 
 const sharedConfig = {
-  entryPoints: ["src/index.ts"],
+  entryPoints: ['src/index.ts'],
   // outdir: 'dist',
   bundle: true,
   // sourcemap: true,
@@ -19,12 +19,12 @@ const sharedConfig = {
 build({
   ...sharedConfig,
   platform: 'node', // for CJS
-  outfile: "dist/index.cjs.js",
+  outfile: 'dist/index.cjs.js',
 })
 
 build({
   ...sharedConfig,
-  outfile: "dist/index.mjs.js",
+  outfile: 'dist/index.mjs.js',
   platform: 'neutral', // for ESM
-  format: "esm",
+  format: 'esm',
 })

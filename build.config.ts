@@ -2,7 +2,7 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   entries: [
-    'dist/index.js'
+    'dist/index.mjs',
     // 'src/index',
     // {
     //   builder: 'mkdist',
