@@ -59,7 +59,7 @@ describe('should', () => {
   })
 
   it('off', () => {
-    const fn = () => {}
+    const fn = () => { }
     emitter.on('ayame', fn)
     emitter.off('ayame', fn)
     expect(emitter.list).toMatchInlineSnapshot(`

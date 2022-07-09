@@ -1,7 +1,7 @@
-import type { Func, Observer } from './types'
+import type { Observer } from './types'
 
 const emitter: Observer = {
-  list: new Map<string, Set<Func>>(),
+  list: new Map<string, Set<Function>>(),
   on,
   emit,
   remove,
@@ -10,20 +10,20 @@ const emitter: Observer = {
   once,
 }
 
-const singleList = new Map<string, Set<Func>>()
+const singleList = new Map<string, Set<Function>>()
 
-export function on(key: string, fn: Func): void {
+export function on(key: string, fn: Function): void {
   if (!emitter.list.has(key))
     emitter.list.set(key, new Set())
 
   emitter.list.get(key)?.add(fn)
 }
 
-export function emit(key: string): void {
+export function emit(key: string, ...args: any[]): void {
   if (!emitter.list.has(key))
     return
 
-  emitter.list.get(key)?.forEach((fn: Func) => fn())
+  emitter.list.get(key)?.forEach((fn: Function) => fn(...args))
 
   if (singleList.has(key))
     singleRemoveEffect(key)
@@ -41,7 +41,7 @@ export function removeAll(): boolean {
   return Boolean(emitter.list.clear())
 }
 
-export function off(key: string, fn: Func): boolean {
+export function off(key: string, fn: Function): boolean {
   if (!emitter.list.has(key))
     return true
 
@@ -52,7 +52,7 @@ export function off(key: string, fn: Func): boolean {
   return true
 }
 
-export function once(key: string, fn: Func): void {
+export function once(key: string, fn: Function): void {
   on(key, fn)
 
   if (!singleList.has(key))
@@ -63,7 +63,7 @@ export function once(key: string, fn: Func): void {
 
 function singleRemoveEffect(key: string): void {
   const fns = singleList.get(key)
-  emitter.list.get(key)?.forEach(ret => fns?.forEach((f: Func) => {
+  emitter.list.get(key)?.forEach(ret => fns?.forEach((f: Function) => {
     if (f === ret)
       emitter.list.get(key)?.delete(ret)
 
