@@ -69,7 +69,7 @@ jobs:
         run: nci
 
       - name: Build
-        run: nr build
+        run: nr esbuild
 
       - name: Test
         run: nr test
