@@ -2,9 +2,9 @@ export interface Observer {
   list: Map<string, Set<Function>>
   on: (key: string, fn: Function) => void
   emit: (key: string, ...args: Arguments<Object>) => void
-  remove: (key: string) => boolean
-  removeAll: () => boolean
-  off: (key: string, fn: Function) => boolean
+  off: (key: string) => void
+  offAll: () => boolean
+  remove: (key: string, fn: Function) => void
   once: (key: string, fn: Function) => void
 }
 

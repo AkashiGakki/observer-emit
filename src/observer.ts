@@ -4,9 +4,9 @@ const emitter: Observer = {
   list: new Map<string, Set<Function>>(),
   on,
   emit,
-  remove,
-  removeAll,
   off,
+  offAll,
+  remove,
   once,
 }
 
@@ -29,27 +29,25 @@ export function emit(key: string, ...args: any[]): void {
     singleRemoveEffect(key)
 }
 
-export function remove(key: string): boolean {
+export function off(key: string): void {
   if (!emitter.list.has(key))
-    return true
+    return
 
   emitter.list.delete(key)
-  return true
 }
 
-export function removeAll(): boolean {
+export function offAll(): boolean {
   return Boolean(emitter.list.clear())
 }
 
-export function off(key: string, fn: Function): boolean {
+export function remove(key: string, fn: Function): void {
   if (!emitter.list.has(key))
-    return true
+    return
 
   emitter.list.get(key)?.delete(fn)
 
   if (!emitter.list.get(key)?.size)
     emitter.list.delete(key)
-  return true
 }
 
 export function once(key: string, fn: Function): void {
