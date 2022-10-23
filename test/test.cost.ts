@@ -12,5 +12,5 @@ for (let i = 0; i < 1000; i++)
 console.timeEnd('test emit')
 
 console.time('test del')
-emitter.list.forEach((_, key) => emitter.remove(key))
+emitter.list.forEach((_, key) => emitter.off(key))
 console.timeEnd('test del')
