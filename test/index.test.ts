@@ -9,10 +9,10 @@ describe('should', () => {
         "emit": [Function],
         "list": Map {},
         "off": [Function],
+        "offAll": [Function],
         "on": [Function],
         "once": [Function],
         "remove": [Function],
-        "removeAll": [Function],
       }
     `)
   })
@@ -58,10 +58,10 @@ describe('should', () => {
     `)
   })
 
-  it('off', () => {
+  it('remove', () => {
     const fn = () => { }
     emitter.on('ayame', fn)
-    emitter.off('ayame', fn)
+    emitter.remove('ayame', fn)
     expect(emitter.list).toMatchInlineSnapshot(`
       Map {
         "shiori" => Set {
@@ -74,9 +74,9 @@ describe('should', () => {
     `)
   })
 
-  it('remove', () => {
+  it('off', () => {
     emitter.on('shiori', () => { })
-    emitter.remove('mizuki')
+    emitter.off('mizuki')
     expect(emitter.list).toMatchInlineSnapshot(`
       Map {
         "shiori" => Set {
@@ -87,8 +87,8 @@ describe('should', () => {
     `)
   })
 
-  it('removeAll', () => {
-    emitter.removeAll()
+  it('offAll', () => {
+    emitter.offAll()
     expect(emitter.list).toMatchInlineSnapshot('Map {}')
   })
 })
