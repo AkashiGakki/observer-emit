@@ -2,6 +2,7 @@
   "extends": "@antfu",
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
+    "antfu/top-level-function": "off",
     "no-console": "off"
   }
 }

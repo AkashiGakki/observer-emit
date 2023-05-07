@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { build } = require('esbuild')
 const { Generator } = require('npm-dts')
 

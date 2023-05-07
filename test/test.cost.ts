@@ -1,4 +1,5 @@
 import emitter from '../src'
+
 // import emitter from '../src/observer'
 
 console.time('test on')

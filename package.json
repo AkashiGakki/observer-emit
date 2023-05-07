@@ -50,7 +50,7 @@
     "esbuild": "rm -rf dist && npx tsno run build.ts",
     "lint": "eslint .",
     "prepublishOnly": "nr esbuild",
-    "release": "bumpp && npm publish",
+    "release": "bumpp && npm publish --access public",
     "start": "esno src/index.ts",
     "test": "vitest",
     "tsc": "tsc",
