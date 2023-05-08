@@ -46,10 +46,10 @@
   "scripts": {
     "babel": "npx babel src --extensions .ts --out-dir lib",
     "build": "unbuild",
+    "build:esbuild": "rm -rf dist && npx tsno run build.ts",
     "dev": "unbuild --stub",
-    "esbuild": "rm -rf dist && npx tsno run build.ts",
     "lint": "eslint .",
-    "prepublishOnly": "nr esbuild",
+    "prepublishOnly": "nr build",
     "release": "bumpp && npm publish --access public",
     "start": "esno src/index.ts",
     "test": "vitest",
